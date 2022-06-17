@@ -51,16 +51,13 @@ def loop_game(inicio_estrada=estrada.inicio_estrada, final_estrada=estrada.final
     pos_inimigo_x = [respawn()[0], respawn()[1], respawn()[2], respawn()[3]]
     pos_inimigo_y = -100
 
-
-
-
     # relogio
     relogio = pygame.time.Clock()  # Frame
 
     # variavel de controle do sitema de pontos
     score = 0
     velocidade_estrada = 5
-    velocidade_controle = 10
+    velocidade_controle = 4
 
     # flag para rodar o jogo
     rodando = True
@@ -77,10 +74,11 @@ def loop_game(inicio_estrada=estrada.inicio_estrada, final_estrada=estrada.final
         # a cada passo do while, vai fazendo o carossel vertical acontecer
         if rel_y < 720:
             tela.blit(bg, (0, rel_y))
+
         # movimento acontecendo:
-        altura += 1.3 * velocidade_estrada
-        pos_inimigo_y += 1 * velocidade_estrada
-        score += 0.2
+        altura += velocidade_estrada
+        pos_inimigo_y +=velocidade_estrada
+        score += 0.009
 
         # controles
         tecla = pygame.key.get_pressed()
@@ -95,23 +93,24 @@ def loop_game(inicio_estrada=estrada.inicio_estrada, final_estrada=estrada.final
 
         # controle da animação da velocidade da estrada (ilusao de que o carro estará mais rápido)
         if score < 50:
-            relogio.tick(20)
+            #relogio.tick(20)
+            velocidade_estrada = 1
         elif 50 <= score < 100:
-            relogio.tick(30)
+            velocidade_estrada = 1.2
         elif 100 <= score < 150:
-            relogio.tick(32)
+            velocidade_estrada = 1.3
         elif 150 <= score < 200:
-            relogio.tick(34)
+            velocidade_estrada = 1.4
         elif 200 <= score < 250:
-            relogio.tick(33)
+            velocidade_estrada = 1.5
         elif 250 <= score < 300:
-            relogio.tick(34)
+            velocidade_estrada = 1.6
         elif 300 <= score < 350:
-            relogio.tick(35)
+            velocidade_estrada = 1.7
         elif 350 <= score < 400:
-            relogio.tick(36)
-        elif 350 <= score < 400:
-            relogio.tick(36)
+            velocidade_estrada = 1.8
+        elif 400 <= score < 500:
+            velocidade_estrada = 1.9
 
         # condicao de respawn
         if pos_inimigo_y > 719:
